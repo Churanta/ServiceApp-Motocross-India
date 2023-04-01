@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SignUpScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
-        '/otpInput': (context) =>  VerifyOtpPage(),
+        '/otpInput': (context) => VerifyOtpPage(),
       },
     );
   }

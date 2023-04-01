@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Flutter app that demonstrates how to use stateful and stateless widgets.
+This is a Flutter app that is made for Motocross India .
 
 ## Requirements
 
@@ -11,7 +11,7 @@ This is a Flutter app that demonstrates how to use stateful and stateless widget
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/your-repository.git`
+1. Clone the repository: `git clone https://github.com/Churanta/ServiceApp-Motocross-India.git`
 2. Open the project in Visual Studio Code
 3. Install the dependencies: `flutter pub get`
 4. Run the app: `flutter run`
@@ -19,17 +19,35 @@ This is a Flutter app that demonstrates how to use stateful and stateless widget
 ## Usage
 
 1. Launch the app
-2. Tap the floating action button to increment the counter
-3. The count is displayed in the center of the screen
+2. Run the Code
+3. TEnjoy using the app
 
 ## Screenshots
 
-![Screenshot 1](/screenshots/screenshot1.jpg)
-![Screenshot 2](/screenshots/screenshot2.jpg)
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+children: [
+Image.asset(
+'/screenshots/screenshot1.jpg',
+width: 200,
+height: 400,
+),
+Image.asset(
+'/screenshots/screenshot2.jpg',
+width: 200,
+height: 400,
+),
+Image.asset(
+'/screenshots/screenshot3.jpg',
+width: 200,
+height: 400,
+),
+],
+)
 
 ## Credits
 
-This app was created by Your Name.
+This app was created by Churata Mondal.
 
 ## License
 

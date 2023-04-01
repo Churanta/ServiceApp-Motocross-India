@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/svg/login.svg
     - assets/svg/signup.svg
+    - assets/svg/otp.svg
     - assets/images/background.png
     - assets/images/signinbg.png
     
