@@ -24,26 +24,9 @@ This is a Flutter app that is made for Motocross India.
 
 ## Screenshots
 
-Row(
-mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-children: [
-Image.asset(
-'screenshots/screenshot1.jpg',
-width: 200,
-height: 400,
-),
-Image.asset(
-'screenshots/screenshot2.jpg',
-width: 200,
-height: 400,
-),
-Image.asset(
-'screenshots/screenshot3.jpg',
-width: 200,
-height: 400,
-),
-],
-)
+|              Login               |              SignUp              |            Verify OTP            |
+| :------------------------------: | :------------------------------: | :------------------------------: |
+| ![](screenshots/screenshot1.jpg) | ![](screenshots/screenshot2.jpg) | ![](screenshots/screenshot3.jpg) |
 
 ## Credits
 
