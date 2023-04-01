@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Flutter app that is made for Motocross India .
+This is a Flutter app that is made for Motocross India.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ This is a Flutter app that is made for Motocross India .
 
 1. Launch the app
 2. Run the Code
-3. TEnjoy using the app
+3. Enjoy using the app
 
 ## Screenshots
 
@@ -28,17 +28,17 @@ Row(
 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 children: [
 Image.asset(
-'/screenshots/screenshot1.jpg',
+'screenshots/screenshot1.jpg',
 width: 200,
 height: 400,
 ),
 Image.asset(
-'/screenshots/screenshot2.jpg',
+'screenshots/screenshot2.jpg',
 width: 200,
 height: 400,
 ),
 Image.asset(
-'/screenshots/screenshot3.jpg',
+'screenshots/screenshot3.jpg',
 width: 200,
 height: 400,
 ),
@@ -47,7 +47,7 @@ height: 400,
 
 ## Credits
 
-This app was created by Churata Mondal.
+This app was created by Churanta Mondal.
 
 ## License
 
