@@ -142,7 +142,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
               const SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/otpInput');
+                  Navigator.pushNamed(context, '/home');
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xffC576F6),
