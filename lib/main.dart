@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:service_app/App%20Services/plumber.dart';
+// import 'package:service_app/App Services/plumber.dart';
 import 'package:service_app/Authentication/login_screen.dart';
 import 'package:service_app/Authentication/signup_screen.dart';
 import 'package:service_app/Authentication/verifyotp.dart';
@@ -42,6 +44,9 @@ class MyApp extends StatelessWidget {
         '/homepage': (context) => Home(),
         '/bookings': (context) => Bookings(),
         '/cart': (context) => Cart(),
+        '/plumber': (context) => Plumber(),
+        '/PlumberService': (context) => PlumberService(),
+
       },
     );
   }
