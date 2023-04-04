@@ -348,7 +348,12 @@ class _PlumberState extends State<Plumber> {
 //
 //
 
-class PlumberService extends StatelessWidget {
+class PlumberService extends StatefulWidget {
+  @override
+  _PlumberServiceState createState() => _PlumberServiceState();
+}
+
+class _PlumberServiceState extends State<PlumberService> {
   final List<String> plumberNames = [
     'John Smith',
     'Jane Doe',
@@ -365,6 +370,24 @@ class PlumberService extends StatelessWidget {
 
   final List<double> plumberRatings = [4.5, 3.8, 4.2, 4.9];
 
+  TextEditingController searchController = TextEditingController();
+  List<String> filteredPlumberNames = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredPlumberNames = plumberNames;
+    searchController.addListener(() {
+      setState(() {
+        String query = searchController.text;
+        filteredPlumberNames = plumberNames
+            .where((plumberName) =>
+                plumberName.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      });
+    });
+  }
+
   Future<void> _bookNow(BuildContext context, String plumberName) async {
     // TODO: Implement the "Book Now" functionality
     await Future.delayed(Duration(seconds: 2)); // Simulate a delay
@@ -378,82 +401,136 @@ class PlumberService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Plumber Service'),
-      ),
-      body: FutureBuilder(
-        // Simulate a network request
-        future: Future.delayed(Duration(seconds: 2), () => true),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // two cards in a row
-              childAspectRatio: 1.0, // width to height ratio of each card
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/logo.jpg',
+                height: 40,
+              ),
+              // SizedBox(width: 10),
+              Text(
+                "|",
+                style: new TextStyle(
+                    fontSize: 50.0,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w200),
+              ),
+              // SizedBox(width: 10),
+              Text(
+                "Plumber Service",
+                style: TextStyle(color: Color.fromARGB(255, 0, 23, 41)),
+              )
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications, color: Colors.black),
+              onPressed: () {},
             ),
-            itemCount: plumberNames.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                elevation: 2.0,
-                margin: EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        ClipOval(
-                          child: Image.network(
-                            plumberPhotos[index],
-                            height: 50.0,
-                            width: 50.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          plumberNames[index],
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        RatingBar.builder(
-                          initialRating: plumberRatings[index],
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {},
-                          ignoreGestures: true, // disable rating
-                          itemSize: 16.0, // adjust size
-                        ),
-                        SizedBox(height: 8.0),
-                        ElevatedButton(
-                          onPressed: () {
-                            _bookNow(context, plumberNames[index]);
-                            Navigator.pushNamed(context, '/home');
-                          },
-                          child: Text('Book Now'),
-                        ),
-                      ],
+          ],
+        ),
+        body: Container(
+          color: Color.fromARGB(255, 251, 243, 245),
+          child: Column(children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                color: Colors.white,
+                child: TextField(
+                  controller: searchController,
+                  decoration: const InputDecoration(
+                    hintText: 'Search by name',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
                 ),
-              );
-            },
-          );
-        },
-      ),
-    );
+              ),
+            ),
+            Expanded(
+              child: FutureBuilder(
+                // Simulate a network request
+                future: Future.delayed(Duration(seconds: 2), () => true),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // two cards in a row
+                      childAspectRatio:
+                          1.0, // width to height ratio of each card
+                    ),
+                    itemCount: filteredPlumberNames.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        elevation: 2.0,
+                        margin: EdgeInsets.all(8.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                ClipOval(
+                                  child: Image.network(
+                                    plumberPhotos[index],
+                                    height: 50.0,
+                                    width: 50.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(height: 8.0),
+                                Text(
+                                  plumberNames[index],
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 8.0),
+                                RatingBar.builder(
+                                  initialRating: plumberRatings[index],
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 2.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {},
+                                  ignoreGestures: true, // disable rating
+                                  itemSize: 16.0, // adjust size
+                                ),
+                                SizedBox(height: 8.0),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _bookNow(context, plumberNames[index]);
+                                    Navigator.pushNamed(context, '/home');
+                                  },
+                                  child: Text('Book Now'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            )
+          ]),
+        ));
   }
 }
