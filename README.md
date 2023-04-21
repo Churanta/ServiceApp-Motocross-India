@@ -21,6 +21,7 @@ This is a Flutter app that is made for Motocross India.
 1. Launch the app
 2. Run the Code
 3. Enjoy using the app
+4. Don't forget to give a star if you like it
 
 ## Screenshots
 
