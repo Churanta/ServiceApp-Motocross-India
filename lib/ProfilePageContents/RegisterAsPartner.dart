@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lottie/lottie.dart';
+
+import '../MainPage.dart';
 
 class RegisterAsPartnerPage extends StatefulWidget {
   @override
@@ -33,7 +37,37 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 251, 243, 245),
       appBar: AppBar(
-        title: Text('Select Services'),
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(
+              'assets/images/logo1.jpg',
+              height: 40,
+            ),
+            // SizedBox(width: 10),
+            Text(
+              "|",
+              style: new TextStyle(
+                  fontSize: 50.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w200),
+            ),
+            // SizedBox(width: 10),
+            Text(
+              "Partner",
+              style: TextStyle(color: Color.fromARGB(255, 0, 23, 41)),
+            )
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Form(
         key: _formKey,
@@ -44,7 +78,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
             children: [
               Text(
                 'Select a service:',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               SizedBox(height: 8.0),
               Column(
@@ -70,7 +104,8 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                     SizedBox(height: 16.0),
                     Text(
                       'Select a sub-service:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(height: 8.0),
                     Column(
@@ -123,8 +158,40 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
 
   Widget _buildNextPage() {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 251, 243, 245),
         appBar: AppBar(
-          title: Text('Select Year of Experience'),
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/logo1.jpg',
+                height: 40,
+              ),
+              // SizedBox(width: 10),
+              Text(
+                "|",
+                style: new TextStyle(
+                    fontSize: 50.0,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w200),
+              ),
+              // SizedBox(width: 10),
+              Text(
+                "Partner",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 0, 23, 41), fontSize: 20),
+              )
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications, color: Colors.black),
+              onPressed: () {},
+            ),
+          ],
         ),
         body: Container(
             decoration: BoxDecoration(
@@ -138,7 +205,8 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                   children: [
                     Text(
                       'Select years of experience:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(height: 8.0),
                     DropdownButtonFormField<String>(
@@ -163,7 +231,8 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                     SizedBox(height: 16.0),
                     Text(
                       'Select a city:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(height: 8.0),
                     DropdownButtonFormField(
@@ -226,7 +295,8 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                     SizedBox(height: 16.0),
                     Text(
                       'Select an ID proof:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(height: 8.0),
                     Column(children: [
@@ -315,7 +385,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                             width: 150,
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/login');
+                                Navigator.pushNamed(context, '/PartnerOtp');
                               },
                               icon: Icon(Icons.save),
                               label: Text('Submit',
@@ -355,5 +425,155 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
       print('Text field value: $_textFieldValue');
 // TODO: Submit the form data to the server or database
     }
+  }
+}
+
+//////////////////////////////////////////
+/////////////////////////////////////////
+////////////////////////////////////////////
+////////////////////////////////////////////
+////////////////////////////////////////////
+////////////////////////////////////////////
+///
+///
+///
+
+// import 'package:flutter/material.dart';
+
+class PartnerOtp extends StatefulWidget {
+  @override
+  _PartnerOtpState createState() => _PartnerOtpState();
+}
+
+class _PartnerOtpState extends State<PartnerOtp> {
+  final _formKey = GlobalKey<FormState>();
+  final _otpController =
+      List<TextEditingController>.generate(4, (i) => TextEditingController());
+  bool _isSubmitting = false;
+  final String _otp = '2123';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('OTP Verification'),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Enter the OTP sent to your phone',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                      4,
+                      (index) => SizedBox(
+                        width: 50,
+                        child: TextFormField(
+                          controller: _otpController[index],
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 24),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a number';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  _isSubmitting
+                      ? CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                _isSubmitting = true;
+                              });
+                              String enteredOtp = '';
+                              for (final controller in _otpController) {
+                                enteredOtp += controller.text;
+                              }
+                              if (enteredOtp == _otp) {
+                                await Future.delayed(Duration(seconds: 2));
+                                setState(() {
+                                  _isSubmitting = false;
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      // title: Text('OTP Verified2'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Lottie.asset(
+                                            'assets/animation/tick.json',
+                                            height: 150,
+                                          ),
+                                          SizedBox(height: 16),
+                                          Text('Your OTP has been verified.'),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('OK'),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            MyHomePage()));
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                setState(() {
+                                  _isSubmitting = false;
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Wrong OTP entered.'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                          child: Text('Verify OTP'),
+                        ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

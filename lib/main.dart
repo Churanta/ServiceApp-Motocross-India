@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/plumber': (context) => Plumber(),
         '/PlumberService': (context) => PlumberService(),
         '/RegisterAsPartner': (context) => RegisterAsPartnerPage(),
-
+        '/PartnerOtp': (context) => PartnerOtp(),
       },
     );
   }

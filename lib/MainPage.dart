@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage>
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Image.asset(
-              'assets/images/logo.jpg',
+              'assets/images/logo1.jpg',
               height: 40,
             ),
             // SizedBox(width: 10),
