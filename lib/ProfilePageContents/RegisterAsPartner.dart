@@ -90,7 +90,11 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                 ),
               Spacer(),
               ElevatedButton(
-                onPressed: _navigateToNextPage,
+                onPressed: () {
+                  setState(() {
+                    _navigateToNextPage();
+                  });
+                },
                 child: Text('Next'),
               ),
             ],
@@ -102,7 +106,9 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
 
   void _navigateToNextPage() {
     if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+      setState(() {
+        _formKey.currentState!.save();
+      });
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => _buildNextPage(),
@@ -127,23 +133,24 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 8.0),
-                ListTileTheme(
-                  selectedColor: Colors.blue,
-                  child: Column(
-                    children: _experiences.map((experience) {
-                      return RadioListTile(
-                        title: Text(
-                            '$experience year${experience == ">10" ? "s" : ""}'),
-                        value: experience,
-                        groupValue: _selectedExperience,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedExperience = value as String?;
-                          });
-                        },
-                      );
-                    }).toList(),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: 'Experience',
+                    border: OutlineInputBorder(),
                   ),
+                  value: _selectedExperience,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedExperience = value;
+                    });
+                  },
+                  items: _experiences.map((experience) {
+                    return DropdownMenuItem<String>(
+                      value: experience,
+                      child: Text(
+                          '$experience year${experience == ">10" ? "s" : ""}'),
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 16.0),
                 Text(
@@ -215,75 +222,55 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                 ),
                 SizedBox(height: 8.0),
                 Column(children: [
-                  ..._idProofs.map((idProof) {
-                    return RadioListTile(
-                      title: Text(idProof),
-                      value: idProof,
-                      groupValue: _selectedIdProof,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedIdProof = value!;
-                        });
-                      },
-                    );
-                  }).toList(),
-                  RadioListTile(
-                    title: Text('Others'),
-                    value: 'Others',
-                    groupValue: _selectedIdProof,
+                  DropdownButtonFormField(
+                    value: _selectedIdProof,
                     onChanged: (value) {
                       setState(() {
-                        _selectedIdProof = value as String;
+                        _selectedIdProof = value.toString();
                       });
                     },
+                    items: _idProofs.map((idProof) {
+                      return DropdownMenuItem(
+                        value: idProof,
+                        child: Text(idProof),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      labelText: 'ID proof',
+                    ),
                   ),
                   if (_selectedIdProof == 'Others')
-                    TextFormField(
-                      initialValue: _idProofOther,
-                      onSaved: (value) {
-                        _idProofOther = value!;
+                    StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return TextFormField(
+                          initialValue: _idProofOther,
+                          onSaved: (value) {
+                            _idProofOther = value!;
+                          },
+                          validator: (value) {
+                            if (_selectedIdProof == 'Others' &&
+                                value!.isEmpty) {
+                              return 'Please enter your ID proof';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'ID proof (others)',
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              _idProofOther = value;
+                            });
+                          },
+                        );
                       },
-                      validator: (value) {
-                        if (_selectedIdProof == 'Others' && value!.isEmpty) {
-                          return 'Please enter your ID proof';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'ID proof (others)',
-                      ),
                     ),
-
-                  SizedBox(height: 16.0),
-                  // TextFormField(
-                  //   initialValue: _pincode,
-                  //   onSaved: (value) {
-                  //     _pincode = value!;
-                  //   },
-                  //   validator: (value) {
-                  //     if (value!.isEmpty) {
-                  //       return 'Please enter your pincode';
-                  //     } else if (value.length != 6 ||
-                  //         int.tryParse(value) == null) {
-                  //       return 'Please enter a valid 6-digit pincode';
-                  //     }
-                  //     return null;
-                  //   },
-                  //   keyboardType: TextInputType.number,
-                  //   inputFormatters: [
-                  //     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                  //     LengthLimitingTextInputFormatter(6),
-                  //   ],
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Pincode',
-                  //   ),
-                  // ),
                   SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: _submitForm,
                     child: Text('Submit'),
                   ),
-                ])
+                ]),
               ],
             ),
           ),
