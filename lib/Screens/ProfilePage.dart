@@ -68,9 +68,9 @@ class Profile extends StatelessWidget {
                     buildOptionRow(context, 'My Rewards', '/my_rewards'),
                     buildOptionRow(
                         context, 'Refer and Earn', '/refer_and_earn'),
-                    // buildOptionRow(
-                    //     context, 'Register as Partner', '/register_as_partner'),
-                    // buildOptionRow(context, 'My Bookings', '/bookings'),
+                    buildOptionRow(
+                        context, 'Register as Partner', '/RegisterAsPartner'),
+                    buildOptionRow(context, 'My Bookings', '/bookings'),
                     buildOptionRow(context, 'Wishlist', '/wishlist'),
                     buildOptionRow(context, 'Contact Us', '/contact_us'),
                     Spacer(),

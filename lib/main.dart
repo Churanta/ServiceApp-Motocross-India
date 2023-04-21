@@ -13,6 +13,7 @@ import 'package:service_app/Screens/EditUserDetails.dart';
 import 'package:service_app/Screens/HomeScreen.dart';
 
 import 'MainPage.dart';
+import 'ProfilePageContents/RegisterAsPartner.dart';
 import 'ProfilePageContents/Rewards.dart';
 
 void main() {
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/cart': (context) => Cart(),
         '/plumber': (context) => Plumber(),
         '/PlumberService': (context) => PlumberService(),
+        '/RegisterAsPartner': (context) => RegisterAsPartnerPage(),
 
       },
     );
