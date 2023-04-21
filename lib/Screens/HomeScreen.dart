@@ -61,6 +61,7 @@ class Home extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
+                    Navigator.pushNamed(context, '/Electrician');
                     // Do something when the button is tapped
                   },
                   child: Container(

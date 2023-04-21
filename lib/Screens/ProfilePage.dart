@@ -71,8 +71,9 @@ class Profile extends StatelessWidget {
                     buildOptionRow(
                         context, 'Register as Partner', '/RegisterAsPartner'),
                     buildOptionRow(context, 'My Bookings', '/bookings'),
-                    buildOptionRow(context, 'Wishlist', '/wishlist'),
+                    // buildOptionRow(context, 'Wishlist', '/wishlist'),
                     buildOptionRow(context, 'Contact Us', '/contact_us'),
+                    buildOptionRow(context, 'Admin Login', '/AdminLogin'),
                     Spacer(),
                     Container(
                       width: double.infinity,

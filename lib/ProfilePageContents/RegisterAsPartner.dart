@@ -456,7 +456,37 @@ class _PartnerOtpState extends State<PartnerOtp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('OTP Verification'),
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(
+              'assets/images/logo1.jpg',
+              height: 40,
+            ),
+            // SizedBox(width: 10),
+            Text(
+              "|",
+              style: new TextStyle(
+                  fontSize: 50.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w200),
+            ),
+            // SizedBox(width: 10),
+            Text(
+              "Partner",
+              style: TextStyle(color: Color.fromARGB(255, 0, 23, 41)),
+            )
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -543,10 +573,12 @@ class _PartnerOtpState extends State<PartnerOtp> {
                                           onPressed: () {
                                             Navigator.of(context)
                                                 .pushReplacement(
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            MyHomePage()));
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        MyHomePage(),
+                                              ),
+                                            );
                                           },
                                         ),
                                       ],
@@ -566,7 +598,17 @@ class _PartnerOtpState extends State<PartnerOtp> {
                               }
                             }
                           },
-                          child: Text('Verify OTP'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            minimumSize: Size(200, 48),
+                            backgroundColor: Color(0xffC576F6),
+                          ),
+                          child: Text(
+                            'Verify OTP',
+                            style: TextStyle(fontSize: 18),
+                          ),
                         ),
                 ],
               ),
@@ -577,3 +619,6 @@ class _PartnerOtpState extends State<PartnerOtp> {
     );
   }
 }
+
+
+//Color(0xffC576F6)

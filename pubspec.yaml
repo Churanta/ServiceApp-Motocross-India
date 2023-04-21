@@ -83,6 +83,8 @@ flutter:
     - assets/images/logo1.jpg
     - assets/images/signinbg.png
     - assets/animation/tick.json
+    - assets/animation/admin.json
+    - assets/animation/admin2.json
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

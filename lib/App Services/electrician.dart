@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class PlumbingBooking {
+class ElectricianBooking {
   String? service;
   String? customService = '';
   DateTime? dateTime;
 }
 
-class Plumber extends StatefulWidget {
+class Electrician extends StatefulWidget {
   @override
-  _PlumberState createState() => _PlumberState();
+  _ElectricianState createState() => _ElectricianState();
 }
 
-class _PlumberState extends State<Plumber> {
+class _ElectricianState extends State<Electrician> {
   final _formKey = GlobalKey<FormState>();
-  final _booking = PlumbingBooking();
+  final _booking = ElectricianBooking();
   final TextEditingController _textFieldController = TextEditingController();
   String _textFieldValue = '';
 
@@ -42,7 +42,7 @@ class _PlumberState extends State<Plumber> {
     super.dispose();
   }
 
-  final List<String> _plumbingServices = [
+  final List<String> _ElectricianServices = [
     'Tap Fittings',
     'Water Tank Installation',
     'Plumbing Contractor',
@@ -75,7 +75,7 @@ class _PlumberState extends State<Plumber> {
               ),
               // SizedBox(width: 10),
               Text(
-                "Plumber Service",
+                "Electrician Service",
                 style: TextStyle(color: Color.fromARGB(255, 0, 23, 41)),
               )
             ],
@@ -101,7 +101,7 @@ class _PlumberState extends State<Plumber> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Select Plumbing Service',
+                              'Select Electrician Service',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class _PlumberState extends State<Plumber> {
                                   }
                                 });
                               },
-                              items: _plumbingServices.map((service) {
+                              items: _ElectricianServices.map((service) {
                                 return DropdownMenuItem<String>(
                                   value: service,
                                   child: Text(service),
@@ -147,7 +147,7 @@ class _PlumberState extends State<Plumber> {
                               TextFormField(
                                 controller: customServiceController,
                                 decoration: InputDecoration(
-                                  labelText: 'Custom Plumbing Service',
+                                  labelText: 'Custom Electrician Service',
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
@@ -315,7 +315,7 @@ class _PlumberState extends State<Plumber> {
                                       'Date and Time: ${DateFormat.yMd().add_jm().format(_booking.dateTime!)}');
                                   // _printTextFieldValue,
                                   Navigator.pushNamed(
-                                      context, '/PlumberService');
+                                      context, '/ElectricianService');
                                 },
                                 icon: Icon(Icons.save_as),
                                 label: Text('Submit'),
@@ -343,57 +343,56 @@ class _PlumberState extends State<Plumber> {
 //
 //------------------------------------------------------------------------
 
-// Code for choose plumber page no. 18 in wireframe
+// Code for choose Electrician page no. 18 in wireframe
 //
 //
 //
 
-class PlumberService extends StatefulWidget {
+class ElectricianService extends StatefulWidget {
   @override
-  _PlumberServiceState createState() => _PlumberServiceState();
+  _ElectricianServiceState createState() => _ElectricianServiceState();
 }
 
-class _PlumberServiceState extends State<PlumberService> {
-  final List<String> plumberNames = [
+class _ElectricianServiceState extends State<ElectricianService> {
+  final List<String> ElectricianNames = [
     'John Smith',
     'Jane Doe',
     'Bob Johnson',
     'Sara Williams'
   ];
 
-  final List<String> plumberPhotos = [
+  final List<String> ElectricianPhotos = [
     'https://picsum.photos/200/300',
     'https://picsum.photos/200/300',
     'https://picsum.photos/200/300',
     'https://picsum.photos/200/300'
   ];
 
-  final List<double> plumberRatings = [4.5, 3.8, 4.2, 4.9];
+  final List<double> ElectricianRatings = [4.5, 3.8, 4.2, 4.9];
 
   TextEditingController searchController = TextEditingController();
-  List<String> filteredPlumberNames = [];
+  List<String> filteredElectricianNames = [];
 
   @override
   void initState() {
     super.initState();
-    filteredPlumberNames = plumberNames;
+    filteredElectricianNames = ElectricianNames;
     searchController.addListener(() {
       setState(() {
         String query = searchController.text;
-        filteredPlumberNames = plumberNames
-            .where((plumberName) =>
-                plumberName.toLowerCase().contains(query.toLowerCase()))
+        filteredElectricianNames = ElectricianNames.where((ElectricianName) =>
+                ElectricianName.toLowerCase().contains(query.toLowerCase()))
             .toList();
       });
     });
   }
 
-  Future<void> _bookNow(BuildContext context, String plumberName) async {
+  Future<void> _bookNow(BuildContext context, String ElectricianName) async {
     // TODO: Implement the "Book Now" functionality
     await Future.delayed(Duration(seconds: 2)); // Simulate a delay
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Your booking is successfully $plumberName'),
+        content: Text('Your booking is successfully $ElectricianName'),
       ),
     );
   }
@@ -420,7 +419,7 @@ class _PlumberServiceState extends State<PlumberService> {
               ),
               // SizedBox(width: 10),
               Text(
-                "Plumber Service",
+                "Electrician Service",
                 style: TextStyle(color: Color.fromARGB(255, 0, 23, 41)),
               )
             ],
@@ -468,7 +467,7 @@ class _PlumberServiceState extends State<PlumberService> {
                       childAspectRatio:
                           1.0, // width to height ratio of each card
                     ),
-                    itemCount: filteredPlumberNames.length,
+                    itemCount: filteredElectricianNames.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                         elevation: 2.0,
@@ -481,7 +480,7 @@ class _PlumberServiceState extends State<PlumberService> {
                               children: <Widget>[
                                 ClipOval(
                                   child: Image.network(
-                                    plumberPhotos[index],
+                                    ElectricianPhotos[index],
                                     height: 50.0,
                                     width: 50.0,
                                     fit: BoxFit.cover,
@@ -489,7 +488,7 @@ class _PlumberServiceState extends State<PlumberService> {
                                 ),
                                 SizedBox(height: 8.0),
                                 Text(
-                                  plumberNames[index],
+                                  ElectricianNames[index],
                                   style: TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
@@ -497,7 +496,7 @@ class _PlumberServiceState extends State<PlumberService> {
                                 ),
                                 SizedBox(height: 8.0),
                                 RatingBar.builder(
-                                  initialRating: plumberRatings[index],
+                                  initialRating: ElectricianRatings[index],
                                   minRating: 1,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
@@ -515,7 +514,7 @@ class _PlumberServiceState extends State<PlumberService> {
                                 SizedBox(height: 8.0),
                                 ElevatedButton(
                                   onPressed: () {
-                                    _bookNow(context, plumberNames[index]);
+                                    _bookNow(context, ElectricianNames[index]);
                                     Navigator.pushNamed(context, '/home');
                                   },
                                   child: Text('Book Now'),
