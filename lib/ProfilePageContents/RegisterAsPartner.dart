@@ -16,6 +16,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
   String? _selectedIdProof;
   String _idProofOther = '';
   String _idProofPhoto = '';
+  String? _textFieldValue;
   final _services = ['Plumbing', 'Electrician', 'Gardening', 'Food'];
   final _subServicesMap = {
     'Plumbing': ['Tap Fitting', 'Bath Fitting', 'Toilet Fitting'],
@@ -27,10 +28,10 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
   final _cities = ['Belagavi', 'Bangalore'];
   final _idProofs = ['Aadhar Card', 'Pan Card', 'Passport', 'Others'];
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 251, 243, 245),
       appBar: AppBar(
         title: Text('Select Services'),
       ),
@@ -49,6 +50,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
               Column(
                 children: _services.map((service) {
                   return RadioListTile(
+                    activeColor: Color(0xffC576F6),
                     title: Text(service),
                     value: service,
                     groupValue: _selectedService,
@@ -77,6 +79,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                         return RadioListTile(
                           title: Text(subService),
                           value: subService,
+                          activeColor: Color(0xffC576F6),
                           groupValue: _selectedSubService,
                           onChanged: (value) {
                             setState(() {
@@ -89,13 +92,16 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
                   ],
                 ),
               Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _navigateToNextPage();
-                  });
-                },
-                child: Text('Next'),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: _navigateToNextPage,
+                  child: Icon(Icons.arrow_forward),
+                  style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(16),
+                      backgroundColor: Color(0xffC576F6)),
+                ),
               ),
             ],
           ),
@@ -106,9 +112,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
 
   void _navigateToNextPage() {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        _formKey.currentState!.save();
-      });
+      _formKey.currentState!.save();
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => _buildNextPage(),
@@ -122,159 +126,216 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
         appBar: AppBar(
           title: Text('Select Year of Experience'),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Select years of experience:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8.0),
-                DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    labelText: 'Experience',
-                    border: OutlineInputBorder(),
-                  ),
-                  value: _selectedExperience,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedExperience = value;
-                    });
-                  },
-                  items: _experiences.map((experience) {
-                    return DropdownMenuItem<String>(
-                      value: experience,
-                      child: Text(
-                          '$experience year${experience == ">10" ? "s" : ""}'),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Select a city:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8.0),
-                DropdownButtonFormField(
-                  value: _selectedCity,
-                  items: _cities.map((city) {
-                    return DropdownMenuItem(
-                      value: city,
-                      child: Text(city),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedCity = value!;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'City',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  initialValue: _address,
-                  onSaved: (value) {
-                    _address = value!;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your address';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Address',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(6),
-                  ],
-                  initialValue: _pincode,
-                  onSaved: (value) {
-                    _pincode = value!;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your pincode';
-                    } else if (value.length != 6 ||
-                        int.tryParse(value) == null) {
-                      return 'Please enter a valid 6-digit pincode';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Pincode',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Select an ID proof:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8.0),
-                Column(children: [
-                  DropdownButtonFormField(
-                    value: _selectedIdProof,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedIdProof = value.toString();
-                      });
-                    },
-                    items: _idProofs.map((idProof) {
-                      return DropdownMenuItem(
-                        value: idProof,
-                        child: Text(idProof),
-                      );
-                    }).toList(),
-                    decoration: InputDecoration(
-                      labelText: 'ID proof',
-                    ),
-                  ),
-                  if (_selectedIdProof == 'Others')
-                    StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                        return TextFormField(
-                          initialValue: _idProofOther,
-                          onSaved: (value) {
-                            _idProofOther = value!;
-                          },
-                          validator: (value) {
-                            if (_selectedIdProof == 'Others' &&
-                                value!.isEmpty) {
-                              return 'Please enter your ID proof';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            labelText: 'ID proof (others)',
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              _idProofOther = value;
-                            });
-                          },
-                        );
-                      },
-                    ),
-                  SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: _submitForm,
-                    child: Text('Submit'),
-                  ),
-                ]),
-              ],
+        body: Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 251, 243, 245),
             ),
-          ),
-        ));
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Select years of experience:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8.0),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        labelText: 'Experience',
+                        border: OutlineInputBorder(),
+                      ),
+                      value: _selectedExperience,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedExperience = value;
+                        });
+                      },
+                      items: _experiences.map((experience) {
+                        return DropdownMenuItem<String>(
+                          value: experience,
+                          child: Text(
+                              '$experience year${experience == ">10" ? "s" : ""}'),
+                        );
+                      }).toList(),
+                    ),
+                    SizedBox(height: 16.0),
+                    Text(
+                      'Select a city:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8.0),
+                    DropdownButtonFormField(
+                      value: _selectedCity,
+                      items: _cities.map((city) {
+                        return DropdownMenuItem(
+                          value: city,
+                          child: Text(city),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCity = value!;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'City',
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    TextFormField(
+                      initialValue: _address,
+                      onSaved: (value) {
+                        _address = value!;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your address';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Address',
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(6),
+                      ],
+                      initialValue: _pincode,
+                      onSaved: (value) {
+                        _pincode = value!;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your pincode';
+                        } else if (value.length != 6 ||
+                            int.tryParse(value) == null) {
+                          return 'Please enter a valid 6-digit pincode';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Pincode',
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    Text(
+                      'Select an ID proof:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8.0),
+                    Column(children: [
+                      DropdownButtonFormField(
+                        value: _selectedIdProof,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedIdProof = value.toString();
+                          });
+                        },
+                        items: _idProofs.map((idProof) {
+                          return DropdownMenuItem(
+                            value: idProof,
+                            child: Text(idProof),
+                          );
+                        }).toList(),
+                        decoration: InputDecoration(
+                          labelText: 'ID proof',
+                        ),
+                      ),
+                      if (_selectedIdProof == 'Others')
+                        StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) {
+                            return TextFormField(
+                              initialValue: _idProofOther,
+                              onSaved: (value) {
+                                _idProofOther = value!;
+                              },
+                              validator: (value) {
+                                if (_selectedIdProof == 'Others' &&
+                                    value!.isEmpty) {
+                                  return 'Please enter your ID proof';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'ID proof (others)',
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _idProofOther = value;
+                                });
+                              },
+                            );
+                          },
+                        ),
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        initialValue: _textFieldValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _textFieldValue = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'ID number',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                          labelText: 'ID Number ',
+                          labelStyle: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 16.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(Icons.arrow_back),
+                            label: Text('Previous'),
+                          ),
+                          Container(
+                            width: 150,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              icon: Icon(Icons.save),
+                              label: Text('Submit',
+                                  style: TextStyle(fontSize: 18)),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xffC576F6),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ]),
+                  ],
+                ),
+              ),
+            )));
   }
 
   void _submitForm() {
@@ -291,6 +352,7 @@ class _RegisterAsPartnerPageState extends State<RegisterAsPartnerPage> {
         print('ID proof (others): $_idProofOther');
       }
       print('ID proof photo: $_idProofPhoto');
+      print('Text field value: $_textFieldValue');
 // TODO: Submit the form data to the server or database
     }
   }
