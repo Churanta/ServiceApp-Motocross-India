@@ -133,6 +133,8 @@ class Home extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
+                    Navigator.pushNamed(context, '/Food');
+                    print("Food");
                     // Do something when the button is tapped
                   },
                   child: Container(
@@ -165,6 +167,7 @@ class Home extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
+                    Navigator.pushNamed(context, '/Gardening');
                     // Do something when the button is tapped
                   },
                   child: Container(

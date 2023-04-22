@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:service_app/Admin/AdminLogin.dart';
+import 'package:service_app/App%20Services/food.dart';
 import 'package:service_app/App%20Services/plumber.dart';
 // import 'package:service_app/App Services/plumber.dart';
 import 'package:service_app/Authentication/login_screen.dart';
@@ -16,6 +17,7 @@ import 'package:service_app/Screens/HomeScreen.dart';
 import 'Admin/AdminHome.dart';
 import 'Admin/EditAdminDetails.dart';
 import 'App Services/electrician.dart';
+import 'App Services/gardening.dart';
 import 'MainPage.dart';
 import 'ProfilePageContents/RegisterAsPartner.dart';
 import 'ProfilePageContents/Rewards.dart';
@@ -54,6 +56,10 @@ class MyApp extends StatelessWidget {
         '/RegisterAsPartner': (context) => RegisterAsPartnerPage(),
         '/PartnerOtp': (context) => PartnerOtp(),
         '/Electrician': (context) => Electrician(),
+        '/Gardening': (context) => Gardening(),
+        '/GardeningService': (context) => GardeningService(),
+        '/Food': (context) => Food(),
+        '/FoodService': (context) => FoodService(),
         '/ElectricianService': (context) => ElectricianService(),
         '/AdminLogin': (context) => AdminLogin(),
         '/Admin': (context) => Admin(),
