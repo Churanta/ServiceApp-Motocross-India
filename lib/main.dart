@@ -13,6 +13,8 @@ import 'package:service_app/Screens/CartScreen.dart';
 import 'package:service_app/Screens/EditUserDetails.dart';
 import 'package:service_app/Screens/HomeScreen.dart';
 
+import 'Admin/AdminHome.dart';
+import 'Admin/EditAdminDetails.dart';
 import 'App Services/electrician.dart';
 import 'MainPage.dart';
 import 'ProfilePageContents/RegisterAsPartner.dart';
@@ -53,10 +55,9 @@ class MyApp extends StatelessWidget {
         '/PartnerOtp': (context) => PartnerOtp(),
         '/Electrician': (context) => Electrician(),
         '/ElectricianService': (context) => ElectricianService(),
-        '/AdminLogin': (context) =>  AdminLogin(),
-
-        
-
+        '/AdminLogin': (context) => AdminLogin(),
+        '/Admin': (context) => Admin(),
+        '/EditAdminDetails': (context) => const EditAdminDetails(),
       },
     );
   }
