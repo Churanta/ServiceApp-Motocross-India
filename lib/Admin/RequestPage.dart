@@ -14,15 +14,15 @@ class _RequestPageState extends State<RequestPage> {
     Request(
         name: 'Jane Smith',
         address: '456 Elm St, Anytown USA',
-        professional: 'Designer'),
+        professional: 'Plumber'),
     Request(
         name: 'Bob Johnson',
         address: '789 Oak St, Anytown USA',
-        professional: 'Engineer'),
+        professional: 'Gardening'),
     Request(
         name: 'Alice Williams',
         address: '101 Maple St, Anytown USA',
-        professional: 'Programmer'),
+        professional: 'Food'),
   ];
 
   TextEditingController searchController = TextEditingController();
