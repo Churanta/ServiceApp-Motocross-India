@@ -43,10 +43,10 @@ class _ElectricianState extends State<Electrician> {
   }
 
   final List<String> _ElectricianServices = [
-    'Tap Fittings',
-    'Water Tank Installation',
-    'Plumbing Contractor',
-    'Toilet Fitting',
+    'Repair',
+    'Replacement',
+    'Installation',
+    'Full Home Checkup',
     'Others'
   ];
 
