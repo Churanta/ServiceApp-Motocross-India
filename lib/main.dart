@@ -21,6 +21,7 @@ import 'App Services/gardening.dart';
 import 'MainPage.dart';
 import 'ProfilePageContents/RegisterAsPartner.dart';
 import 'ProfilePageContents/Rewards.dart';
+import 'ProfilePageContents/Wallet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         '/ElectricianService': (context) => ElectricianService(),
         '/AdminLogin': (context) => AdminLogin(),
         '/Admin': (context) => Admin(),
+        '/Wallet': (context) => Wallet(),
         '/EditAdminDetails': (context) => const EditAdminDetails(),
       },
     );

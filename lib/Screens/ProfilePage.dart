@@ -62,7 +62,7 @@ class Profile extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
+                child: ListView(
                   children: [
                     SizedBox(height: 20),
                     buildOptionRow(context, 'My Rewards', '/my_rewards'),
@@ -74,6 +74,7 @@ class Profile extends StatelessWidget {
                     // buildOptionRow(context, 'Wishlist', '/wishlist'),
                     buildOptionRow(context, 'Contact Us', '/contact_us'),
                     buildOptionRow(context, 'Admin Login', '/AdminLogin'),
+                    buildOptionRow(context, 'My Wallet', '/Wallet'),
                     Spacer(),
                     Container(
                       width: double.infinity,
