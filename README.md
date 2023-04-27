@@ -31,15 +31,15 @@ This is a Flutter app that is made for Motocross India.
 
 |             UserPage             |             Booking              |             Homepage             |
 | :------------------------------: | :------------------------------: | :------------------------------: |
-| ![](screenshots/screenshot4.jpg) | ![](screenshots/screenshot5.jpg) | ![](screenshots/screenshot6.jpg) |
+| ![WhatsApp Image 2023-04-27 at 15 56 01 (1)](https://user-images.githubusercontent.com/83538805/234836842-89da4889-6094-4ccf-a626-46fb981f9b5d.jpeg) | ![](screenshots/screenshot5.jpg) | ![](screenshots/screenshot6.jpg) |
 
 |            RewardPage            |             Plumbers             |             formplum             |
 | :------------------------------: | :------------------------------: | :------------------------------: |
 | ![](screenshots/screenshot7.jpg) | ![](screenshots/screenshot8.jpg) | ![](screenshots/screenshot9.jpg) |
 
-|             Share app             |              Contact              |             Rewaeds              |
+|             Share app             |              Contact              |            Wallet             |
 | :-------------------------------: | :-------------------------------: | :------------------------------: |
-| ![](screenshots/screenshot10.jpg) | ![](screenshots/screenshot11.jpg) | ![](screenshots/screenshot7.jpg) |
+| ![](screenshots/screenshot10.jpg) | ![](screenshots/screenshot11.jpg) | ![WhatsApp Image 2023-04-27 at 15 56 01](https://user-images.githubusercontent.com/83538805/234836847-c074a4c8-273f-448a-8777-2213b2b874fa.jpeg) |
 
 ## Credits
 
