@@ -6,8 +6,8 @@ This is a Flutter app that is made for Motocross India.
 
 ## Requirements
 
-- Flutter 2.8.1 or newer
-- Dart 2.15.1 or newer
+- Flutter 2.8.1 or newer.
+- Dart 2.15.1 or newer.
 
 ## Installation
 
